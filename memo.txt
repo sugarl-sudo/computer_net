@@ -1,0 +1,6 @@
+〇socket()
+(fd = socket(PF_INET, SOCK_STREAM, 0)) < 0)
+これの意味
+int domain 通信ドメイン(ipv4の場合は，PF_INET)
+int type TCPの場合はSOCK_STREAM
+int protocol 
