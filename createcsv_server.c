@@ -21,10 +21,11 @@ main()
     struct sockaddr_in    caddr;
     int    len;
     int    ret;
-    char   buf[1024];
+    char   *buf[1024];
     FILE *fp;
+    char *p;
 
-    fp = fopen("phone_book.txt", "w");
+    fp = fopen("phone_book.csv", "w");
 
     /*
      *  ストリーム型ソケット作る．
@@ -78,16 +79,31 @@ main()
     /* クライアントと接続されているソケットからデータを受け取る */
 
     do{
+        write(fd2, "名前を入力してください\n", 1024);
+        // 名前を受け取る
+        ret = read(fd2, buf, 1024);
+        // 終了かどうか
+        if (strcmp(buf, "QUIT\n") == 0){
+          break;
+        }
+
+        while(p=strchr(buf,'\n')){
+          strcpy(p,p+1);
+        }
+
+        fprintf(fp, buf, "w");
+        fprintf(fp, ", ", "w");
+
+        write(fd2, "電話番号を入力してください(080-xxxx-xxxx)\n", 1024);
+
         ret = read(fd2, buf, 1024);
 
         fprintf(fp, buf, "w");
-        fprintf(fp, "\n", "w");  
 
-        /* 変換したデータをクライアントに送り返す */
-        write(fd2, buf, 1024);
     }
     while (strcmp(buf, "QUIT\n") != 0);
 
     /* 通信が終わったらソケットを閉じる */
     close(fd2);
+    fclose(fp);
 }
