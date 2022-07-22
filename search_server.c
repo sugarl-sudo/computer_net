@@ -24,7 +24,7 @@ main()
     ENTRY e;
     ENTRY *ep;
     char *buf[1024];
-    char *ans[1024];
+    char *ans;
 
     const size_t capacity = sizeof companies / sizeof companies[0];
     hcreate(capacity);

@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 
     /* null-terminate the received data */
     echoBuffer[respStringLen] = '\0';
-    printf("Received: %s\n", echoBuffer);    /* Print the echoed arg */
+    printf("受けったメッセージ: %s\n", echoBuffer);    /* Print the echoed arg */
     
     close(sock);
     exit(0);

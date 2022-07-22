@@ -45,11 +45,15 @@ int main(int argc, char *argv[])
         if ((recvMsgSize = recvfrom(sock, echoBuffer, ECHOMAX, 0,
             (struct sockaddr *) &echoClntAddr, &cliAddrLen)) < 0)
             DieWithError("recvfrom() failed");
+            
 
-        printf("メッセージを受け取った clientは%s\n", inet_ntoa(echoClntAddr.sin_addr));
+        printf("メッセージを受け取ったclientは%s\n", inet_ntoa(echoClntAddr.sin_addr));
+        // メッセージがQUITの場合は，サーバを終了させる
+        if (strcmp("QUIT", echoBuffer) == 0) break;
 
         if (sendto(sock, echoBuffer, recvMsgSize, 0, 
              (struct sockaddr *) &echoClntAddr, sizeof(echoClntAddr)) != recvMsgSize)
             DieWithError("sendto() failed");
     }
+    return 0;
 }
