@@ -22,7 +22,7 @@ main()
     int    len;
     int    ret;
     char   buf[1024];
-
+    FILE *fp;
 
     /*
      *  ストリーム型ソケット作る．
@@ -74,20 +74,26 @@ main()
     close(fd1);
 
     /* クライアントと接続されているソケットからデータを受け取る */
+    write(fd2, "ファイル名を入力してください\n", 1024);
+    ret = read(fd2, buf, 1024)
+    fp = fopen(buf, "w");
+    
+    
+  
 
-    do{
-      ret = read(fd2, buf, 1024);
+  //   do{
+  //     ret = read(fd2, buf, 1024);
 
-      /* bufの中の小文字を大文字に変換する */
-      for (i=0; i< ret; i++) {
-	if (isalpha(buf[i]))
-	  buf[i] = toupper(buf[i]);
-      }
+  //     /* bufの中の小文字を大文字に変換する */
+  //     for (i=0; i< ret; i++) {
+	// if (isalpha(buf[i]))
+	//   buf[i] = toupper(buf[i]);
+  //     }
 
-      /* 変換したデータをクライアントに送り返す */
-      write(fd2, buf, 1024);
-    }
-    while (strcmp(buf, "QUIT\n") != 0);
+  //     /* 変換したデータをクライアントに送り返す */
+  //     write(fd2, buf, 1024);
+  //   }
+  //   while (strcmp(buf, "QUIT\n") != 0);
 
     /* 通信が終わったらソケットを閉じる */
     close(fd2);

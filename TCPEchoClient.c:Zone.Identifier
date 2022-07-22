@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=http://cs.baylor.edu/~donahoo/practical/CSockets/textcode.html
+HostUrl=http://cs.baylor.edu/~donahoo/practical/CSockets/code/TCPEchoClient.c
